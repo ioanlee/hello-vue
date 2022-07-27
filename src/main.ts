@@ -9,4 +9,5 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // .use(router)
 createApp(App)
 	.use(BootstrapVue3)
+	.use(router)
 	.mount('#app')
