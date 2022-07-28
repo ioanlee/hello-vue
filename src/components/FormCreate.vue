@@ -1,11 +1,22 @@
+
+<!-- // TODO починить this -->
+<!-- // TODO вставить axios -->
+<!-- // TODO удаление категории -->
+<!-- // TODO create table dishes with relations -->
+<!-- TODO categories table input -->
+<!-- TODO create ingredients table + input -->
+<!-- TODO create dishes table + input -->
+<!-- TODO changing dish rows -->
+<!-- TODO ... -->
+<!-- TODO image storing -->
+<!-- TODO PRISMA -->
+<!-- TODO animations -->
 <script lang="ts">
-	import { ref } from 'vue'
-	export default {		
+	import { ref, defineComponent } from 'vue'
+
+	export default defineComponent({		
 		data() {
 			return {
-				file1: 1,
-				file2: null,
-				value: '',
 				form: {
 					name: "",
 					image: "./assets/logo.png",
@@ -22,16 +33,21 @@
 			};
 		},
 		methods: {
-			onSubmit() { alert(JSON.stringify(this.form)) },
-			async getCategories() {
+			getImgPath(e: any) {},
+			onSubmit() { 
+				alert(JSON.stringify(this.form)) 
+			},
+			getCategories: async () => {
 				// await fetch('https://jsonplaceholder.typicode.com/todos/1')
-				// 	.then(response => response.json())
-				// 	.then(json => this.categories = json)
-				await fetch('http://localhost:')
-			}
+				// 	.then(res => res.json())
+				// 	.then(data => this.categories = data)
+				// // await fetch('http://localhost:5000/categories')
+			},
 		},
-		async mounted() {	}
-	}
+		async mounted() {
+			
+		}
+	})
 </script>
 
 <template>
