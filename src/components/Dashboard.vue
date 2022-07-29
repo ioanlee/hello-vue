@@ -1,3 +1,19 @@
+<!-- // TODO починить this -->
+<!-- // TODO вставить axios -->
+<!-- // TODO удаление категории -->
+<!-- // TODO create table dishes with relations -->
+<!-- // TODO categories table input -->
+<!-- // TODO create ingredients table + input -->
+<!-- TODO create dishes table + input -->
+<!-- TODO editable dish rows -->
+<!-- // TODO ... -->
+<!-- TODO image storing -->
+<!-- TODO PRISMA -->
+<!-- // TODO animations -->
+<!-- TODO delete passwords from repository, fix .gitignore -->
+<!-- TODO how postgres work for portativity -->
+<!-- TODO process.env.PORT :5000 -->
+
 <script lang="ts">
 	import FormCreateItem from './FormCreate.vue'
 	import { defineComponent } from '@vue/runtime-core'
@@ -8,24 +24,7 @@
 </script>
 
 <template>
-	<hr>
-	<nav class="navigation w-50 m-auto">
-		<a href="/">Главная</a>
-		<a href="/categories">Категории</a>
-	</nav>	
-	<router-view></router-view>
-</template>
+	<div>
 
-<style lang="scss">	
-	.reload-button {
-		width: 150px;
-		height: 40px;
-		border: 1px solid lightgrey;
-		border-radius: 50px;
-		margin: 0 auto;
-	}
-	.navigation {
-		display: flex;
-		gap: 20px;
-	}
-</style>
+	</div>
+</template>

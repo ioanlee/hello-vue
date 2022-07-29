@@ -1,13 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../components/Dashboard.vue'
-import FormCreateVue from '../components/FormCreate.vue'
-import TableCategories from '../components/TableCategories.vue'
+import FormCreate from '../components/FormCreate.vue'
+import Categories from '../components/Categories.vue'
+import Ingredients from '../components/Ingredients.vue'
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
-		{ path: '/', component: FormCreateVue },
-		{ path: '/categories', component: TableCategories },
+		{ path: '/', component: FormCreate },
+		{ path: '/categories', component: Categories },
+		{ path: '/ingredients', component: Ingredients },
 	]
 })
 

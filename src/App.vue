@@ -1,21 +1,26 @@
 <script setup lang="ts">
-	// This starter template is using Vue 3 <script setup> SFCs
-	// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-	import Dashboard from './components/Dashboard.vue'
+
 </script>
 
 <template>
-	<img alt="Vue logo" src="./assets/logo.png" />
-	<Dashboard/>
+	<b-nav tabs align="center">
+		<b-nav-item><a href="/">Home</a></b-nav-item>
+		<b-nav-item><a href="/dishes">Dishes</a></b-nav-item>
+		<b-nav-item><a href="/categories">Categories</a></b-nav-item>
+		<b-nav-item><a href="/ingredients">Ingredients</a></b-nav-item>
+	</b-nav>
+	<router-view></router-view>
 </template>
 
 <style lang="scss">
 	#app {
-		font-family: Avenir, Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
 		color: #2c3e50;
-		margin-top: 60px;
+		margin-top: 40px;
+	}
+	a {
+		text-decoration: none !important;
 	}
 </style>

@@ -1,16 +1,3 @@
-
-<!-- // TODO починить this -->
-<!-- // TODO вставить axios -->
-<!-- // TODO удаление категории -->
-<!-- // TODO create table dishes with relations -->
-<!-- TODO categories table input -->
-<!-- TODO create ingredients table + input -->
-<!-- TODO create dishes table + input -->
-<!-- TODO changing dish rows -->
-<!-- TODO ... -->
-<!-- TODO image storing -->
-<!-- TODO PRISMA -->
-<!-- TODO animations -->
 <script lang="ts">
 	import { ref, defineComponent } from 'vue'
 
