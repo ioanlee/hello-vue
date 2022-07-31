@@ -53,7 +53,9 @@ export default class PostgresController {
 	}
 	
 	async getDishes() {
-		const query = `SELECT * FROM dishes JOIN categories ON dishes.d_id = categories.c_id`
+		// SELECT d_id, d_name, c_name FROM dishes JOIN categories ON dishes.d_id = categories.c_id
+		// SELECT * FROM ingredients WHERE i_id IN (1, 6, 7)
+		const query = `Select d_id as id, d_name as name, d_image as image, c_name as category, string_agg(i_name, ',') as ingredients FROM dishes, categories, ( select dish_id, i_name FROM dish_to_ingredient LEFT JOIN ingredients ON ingredient_id=i_id ) as ing WHERE d_id = dish_id AND c_id = d_id GROUP BY d_id, d_name, d_image, c_name;`
 		const { rows } = await client.query(query)
 		return rows
 	}

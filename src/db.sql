@@ -17,16 +17,32 @@ CREATE TABLE ingredients(
 CREATE TABLE dishes(
 	d_id SERIAL PRIMARY KEY,
 	d_name VARCHAR(50) NOT NULL,
+	d_image VARCHAR(50),
 	d_category INT REFERENCES categories (c_id),
-	-- d_image BLOB NOT NULL
-	-- d_ingredients INT [] REFERENCES ingredients (i_id),
+	d_ingredients INT [],
 );
 -- insert into dishes
-INSERT INTO dishes(d_name, d_category)
-VALUES('Apple Pie', 1);
-INSERT INTO dishes(d_name, d_category)
-VALUES('Cola', 2);
+INSERT INTO dishes(d_name, d_category, d_image, d_ingredients)
+VALUES('Apple Pie', 1, 'logo.png', ARRAY [ 10, 1 ]);
+INSERT INTO dishes(d_name, d_category, d_image, d_ingredients)
+VALUES('Cola', 2, 'logo.png', ARRAY [ 9 ]);
 -- select * dishes
 SELECT *
 FROM dishes
 	JOIN categories ON dishes.d_id = categories.c_id;
+-- select dishes
+Select d_id as id, 
+       d_name as name, 
+       d_image as image, 
+       c_name as category, 
+       string_agg(i_name, ',') as ingredients 
+FROM dishes,
+     categories,
+    (
+        select dish_id, i_name 
+        FROM dish_to_ingredient 
+        LEFT JOIN ingredients 
+        ON ingredient_id=i_id
+    ) as ing
+WHERE d_id = dish_id AND c_id = d_id
+GROUP BY d_id, d_name, d_image, c_name;

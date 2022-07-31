@@ -34,7 +34,7 @@
 	})
 </script>
 
-<template lang="">
+<template>
 	<h2>Add new category</h2>
 	<div class="container create-row w-50">
 		<b-form-input v-model="text" placeholder="Enter category name"></b-form-input>
