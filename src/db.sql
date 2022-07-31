@@ -35,7 +35,7 @@ Select d_id as id,
        d_name as name, 
        d_image as image, 
        c_name as category, 
-       string_agg(i_name, ',') as ingredients 
+       array_agg(i_name) as ingredients 
 FROM dishes,
      categories,
     (

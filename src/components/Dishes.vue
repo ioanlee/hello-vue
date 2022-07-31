@@ -21,6 +21,7 @@
 <script lang="ts">
 	import { defineComponent } from "vue";
 	import axios from 'axios'
+import { nullLiteral } from "@babel/types";
 
 	const URL = `http://localhost:5000/dishes/`
 
@@ -29,7 +30,15 @@
 			return {
 				text: '',
 				selectedImage: null,
-				items: null,
+				items: [
+					{
+						id: null,
+						image: null,
+						name: null,
+						category: null,
+						ingredients: [null]
+					}
+				],
 			}
 		},
 		mounted() {
@@ -91,10 +100,10 @@
 				<th scope="row"><span class="cell"><img :src="`src/assets/${item.image}`" alt=""></span></th>
 				<th scope="row"><span class="cell">{{ item.name }}</span></th>
 				<th scope="row"><span class="cell">{{ item.category }}</span></th>
-				<th scope="row"><span class="cell ingredients" v-for="(ingredient, index) in item.ingredients.split(',')" :key="index">{{ ingredient }}</span></th>
+				<th scope="row"><span class="cell ingredients" v-for="(ingredient, index) in item.ingredients" :key="index">{{ ingredient }}</span></th>
 				<th scope="row">
-					<b-button class="w-100 mt-1" variant="outline-primary" @click="editDish(item.d_id)">Edit</b-button>
-					<b-button class="w-100 mt-1" variant="outline-danger" @click="deleteDish(item.d_id)">Delete</b-button>
+					<b-button class="w-100 mt-1" variant="outline-primary" @click="editDish(item.id)">Edit</b-button>
+					<b-button class="w-100 mt-1" variant="outline-danger" @click="deleteDish(item.id)">Delete</b-button>
 				</th>
 			</tr>
 		</tbody>
