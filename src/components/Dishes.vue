@@ -35,7 +35,6 @@
 				ingredients: null,
 				form: {
 					name: '',
-					image: null,
 					imageFile: null,
 					category: null,
 					ingredients: null,
@@ -48,10 +47,15 @@
 			this.getIngredients()
 		},
 		methods: {
-			onImageSelected(event: any)	{ this.form.image = event.target.files[0].name; this.form.imageFile = event.target.files },
-			async addDish(form: any) 		{ await axios.post(URL, form); this.refreshDishes() },
+			onImageSelected(event: any)	{ this.form.imageFile = event.target.files[0] },
 			async deleteDish(id: Number) 	{ await axios.delete(`${URL}${id}`); this.refreshDishes() },
 			async refreshDishes() 			{ await axios.get(URL).then(res => this.dishes = res.data) },
+			async addDish(form: any) {
+				const formdata = new FormData()
+				Object.entries(this.form).forEach(value => formdata.append(value[0], value[1]))
+				await axios.post(URL, formdata)
+				this.refreshDishes() 
+			},
 			async getCategories() {
 				let categoriesRaw
 				await axios.get(`http://localhost:5000/categories/`)

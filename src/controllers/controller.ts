@@ -64,7 +64,8 @@ export default class PostgresController {
 		return rows[0]
 	}
 
-	async addDish(body: { name: string, image: string, category: number, ingredients: number[] }) {
+	async addDish(body: any) {
+		// { name: string, image: string, category: number, ingredients: number[] }
 		// TODO checks for incorrect inputs
 		const { name, image, category, ingredients } = body
 		const query = `INSERT INTO dishes(d_name, d_category, d_image, d_ingredients) VALUES('${name}', ${category}, '${image}', ${ingredients});`
