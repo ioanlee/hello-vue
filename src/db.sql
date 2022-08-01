@@ -34,15 +34,16 @@ FROM dishes
 Select d_id as id, 
        d_name as name, 
        d_image as image, 
-       c_name as category, 
-       array_agg(i_name) as ingredients 
-FROM dishes,
-     categories,
-    (
-        select dish_id, i_name 
-        FROM dish_to_ingredient 
-        LEFT JOIN ingredients 
-        ON ingredient_id=i_id
-    ) as ing
-WHERE d_id = dish_id AND c_id = d_id
+       c_name as category,
+       array_agg(i_name) as ingredients
+FROM dishes 
+LEFT JOIN categories
+    ON d_category = c_id
+LEFT JOIN (
+    select dish_id, i_name 
+    FROM dish_to_ingredient 
+    LEFT JOIN ingredients 
+    ON ingredient_id=i_id
+) as ing
+ON d_id = dish_id
 GROUP BY d_id, d_name, d_image, c_name;

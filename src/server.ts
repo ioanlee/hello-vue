@@ -10,6 +10,13 @@ const PORT = 5000
 const prisma = new PrismaClient()
 const corsOptions = { origin: "http://localhost:4000" }
 
+const multer = require('multer')
+const storage = multer.diskStorage({
+	destination: 	function(req: any, file: any, cb: any) { cb(null, './uploads/') },
+	filename: 		function(req: any, file: any, cb: any) { cb(null, new Date().getTime() + file.originalname) },
+})
+const upload = multer({ storage })
+
 app.use(cors(corsOptions))
 app.use(express.json())
 
@@ -30,13 +37,14 @@ app.route('/ingredients')
 app.route('/ingredients/:id')
 	.get(async (req: Request, res: Response) => res.send(await db.getIngredient(req.params.id)))
 	.delete(async (req: Request, res: Response) => res.send(await db.deleteIngredient(req.params.id)))
-
+	
+// TODO cleanup
 app.route('/dishes')
 	.get(async (req: Request, res: Response) => res.send(await db.getDishes()))
-	.post()
+	.post(upload.single('imageFile'), async (req: any, res: Response) => res.send(await db.addDish({...req.body, image: req.file.filename})))
 
 app.route('/dishes/:id')
 	.get(async (req: Request, res: Response) => res.send(await db.getDish(req.params.id)))
-	.delete()
+	.delete(async (req: Request, res: Response) => res.send(await db.deleteDish(req.params.id)))
 
 client.connect()
