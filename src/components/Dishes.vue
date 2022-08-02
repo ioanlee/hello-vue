@@ -8,19 +8,22 @@
 <!-- // TODO replace id with ingredient name -->
 <!-- // TODO route to get dishes info -->
 <!-- // TODO create new dish input -->
-<!-- TODO file storing -->
+<!-- // TODO file storing -->
+<!-- // TODO remove errors by ts -->
+<!-- TODO ПОФИКСИТЬ ДОБАВЛЕНИЕ DISH-->
 <!-- TODO editable dish rows -->
-<!-- // TODO ... -->
-<!-- TODO PRISMA -->
-<!-- // TODO animations -->
+<!-- // TODO PRISMA -->
 <!-- TODO delete passwords from repository, fix .gitignore -->
-<!-- TODO how postgres work for portativity -->
-<!-- TODO process.env.PORT :5000 -->
-<!-- TODO delete dashboard -->
+<!-- // TODO переделать fetch  -->
+<!-- // TODO animations -->
+<!-- // TODO how postgres work for portativity -->
+<!-- // TODO process.env.PORT :5000 -->
+<!-- // TODO delete dashboard -->
 
 <script lang="ts">
 	import { defineComponent } from "vue"
-	import axios from 'axios'
+	import axios, { AxiosResponse } from 'axios'
+	import { Dish, Category, Ingredient } from '../interfaces'
 
 	const URL = `http://localhost:5000/dishes/`
 
@@ -28,16 +31,16 @@
 		data() {
 			return {
 				selected_ingredients: [],
-				test_ingredients: ['Apple', 'Orange', 'Banana', 'Lime', 'Peach', 'Chocolate', 'Strawberry'],
+				// test_ingredients: ['Apple', 'Orange', 'Banana', 'Lime', 'Peach', 'Chocolate', 'Strawberry'] as any,
 
-				dishes: [],
-				categories: null,
-				ingredients: null,
+				dishes: [] as Dish[],
+				categories: [] as any,
+				ingredients: [] as string[],
 				form: {
-					name: '',
-					imageFile: null,
-					category: null,
-					ingredients: null,
+					name: '' as string,
+					imageFile: {} as File,
+					category: NaN as number,	
+					ingredients: [1] as number[]
 				},
 			}
 		},
@@ -47,26 +50,34 @@
 			this.getIngredients()
 		},
 		methods: {
-			onImageSelected(event: any)	{ this.form.imageFile = event.target.files[0] },
-			async deleteDish(id: Number) 	{ await axios.delete(`${URL}${id}`); this.refreshDishes() },
-			async refreshDishes() 			{ await axios.get(URL).then(res => this.dishes = res.data) },
+			onImageSelected(event: any) {
+				this.form.imageFile = event.target.files[0]
+			},
+			async deleteDish(id: Number) {
+				await axios.delete(`${URL}${id}`)
+				this.refreshDishes()
+			},
+			async refreshDishes() {
+				await axios.get(URL)
+					.then(res => this.dishes = res.data)
+			},
 			async addDish(form: any) {
 				const formdata = new FormData()
-				Object.entries(this.form).forEach(value => formdata.append(value[0], value[1]))
+				Object.entries(this.form).forEach((value: any[]) => formdata.append(value[0], value[1]))
 				await axios.post(URL, formdata)
 				this.refreshDishes() 
 			},
 			async getCategories() {
-				let categoriesRaw
+				let categoriesRaw: Category[] = []
 				await axios.get(`http://localhost:5000/categories/`)
-					.then(res => categoriesRaw = res.data)
-				this.categories = categoriesRaw.reduce((obj, item) => ({...obj, [item.c_id]: item.c_name }), {})
+					.then((res) => categoriesRaw = res.data)
+				this.categories = categoriesRaw.reduce((obj: Object, item: Category) => ({...obj, [item.c_id]: item.c_name }), {}) // @ ty
 			},
 			async getIngredients() {
-				let ingredientsRaw
+				let ingredientsRaw: Ingredient[] = []
 				await axios.get(`http://localhost:5000/ingredients/`)
 					.then(res => ingredientsRaw = res.data)
-				this.ingredients = ingredientsRaw.map(v => v.i_name)
+				this.ingredients = ingredientsRaw.map((value: Ingredient) => value.i_name)
 			},
 			onSubmit() {
 				this.addDish(this.form)
@@ -74,13 +85,13 @@
 			},
 			onReset() {
 				this.form.name = ''
-				this.form.category = null
+				this.form.category = NaN
 			},
 			async editDish(id: Number) {},
 		},
 		computed: {
 			availableOptions() {
-				return this.test_ingredients.filter(opt => this.selected_ingredients.indexOf(opt) === -1)
+				// return this.test_ingredients.filter((opt) => this.selected_ingredients.indexOf(opt) === -1)
 			},
     	}
 	})
@@ -163,7 +174,7 @@
 				<th scope="col">Image</th>
 				<th scope="col">Name</th>
 				<th scope="col">Category</th>
-				<th scope="col">Ingredients</th>
+				<!-- <th scope="col">Ingredients</th> -->
 				<th scope="col">Action</th>
 			</tr>
 		</thead>
@@ -173,7 +184,7 @@
 				<th scope="row"><span class="cell"><img class="w-50" :src="`uploads/${item.image || 'logo.png'}`" alt=""></span></th>
 				<th scope="row"><span class="cell">{{ item.name }}</span></th>
 				<th scope="row"><span class="cell">{{ item.category }}</span></th>
-				<th scope="row"><span class="cell ingredients" v-for="(ingredient, index) in item.ingredients" :key="index">{{ ingredient }}</span></th>
+				<!-- <th scope="row"><span class="cell ingredients" v-for="(ingredient, index) in item.ingredients" :key="index">{{ ingredient }}</span></th> -->
 				<th scope="row">
 					<b-button class="w-100 mt-1" variant="outline-primary" @click="editDish(item.id)">Edit</b-button>
 					<b-button class="w-100 mt-1" variant="outline-danger" @click="deleteDish(item.id)">Delete</b-button>
@@ -185,6 +196,6 @@
 
 <style lang="scss">
 	.ingredients:not(:last-of-type)::after {
-		content: ',';
+		content: ', ';
 	}
 </style>

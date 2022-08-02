@@ -4,10 +4,9 @@
 
 <template>
 	<b-nav tabs align="center">
-		<b-nav-item><a href="/">Home</a></b-nav-item>
-		<b-nav-item><a href="/dishes">Dishes</a></b-nav-item>
-		<b-nav-item><a href="/categories">Categories</a></b-nav-item>
-		<b-nav-item><a href="/ingredients">Ingredients</a></b-nav-item>
+		<b-nav-item><router-link to="/">Dishes</router-link></b-nav-item>
+		<b-nav-item><router-link to="/categories">Categories</router-link></b-nav-item>
+		<b-nav-item><router-link to="/ingredients">Ingredients</router-link></b-nav-item>
 	</b-nav>
 	<router-view></router-view>
 </template>

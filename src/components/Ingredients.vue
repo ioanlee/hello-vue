@@ -4,11 +4,16 @@
 	
 	const URL = `http://localhost:5000/ingredients/`
 	
+	interface Ingredient {
+		i_id: number,
+		i_name: string,
+	}
+	
 	export default defineComponent({
 		data() {
 			return {
-				items: null,
-				text: '',
+				items: [] as Ingredient[],
+				text: '' as string,
 			}
 		},
 		mounted() {

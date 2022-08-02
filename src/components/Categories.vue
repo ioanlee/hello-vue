@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { defineComponent } from "vue"
 	import axios from 'axios'
+	import { Category } from '../interfaces'
+	import { defineComponent } from "vue"
 
 	const URL = `http://localhost:5000/categories/`
 
 	export default defineComponent({
 		data() {
 			return {
-				items: null,
-				text: '',
+				items: [] as Category[],
+				text: '' as string,
 			}
 		},
 		mounted() {

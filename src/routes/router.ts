@@ -8,10 +8,10 @@ import Dishes from '../components/Dishes.vue'
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
-		{ path: '/', component: FormCreate },
+		{ path: '/', component: Dishes },
+		// { path: '/dishes', component: Dishes },
 		{ path: '/categories', component: Categories },
 		{ path: '/ingredients', component: Ingredients },
-		{ path: '/dishes', component: Dishes },
 	]
 })
 
