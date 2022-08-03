@@ -1,7 +1,7 @@
 import { client } from '../db.config'
 
-export default class PostgresController {
-
+export default class PostgresController 
+{
 	async getCategories() {
 		const query = `SELECT * FROM categories`
 		const { rows } = await client.query(query)

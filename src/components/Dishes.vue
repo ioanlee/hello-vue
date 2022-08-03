@@ -69,7 +69,9 @@
 				this.form.name = ''
 				this.form.category = NaN
 			},
-			async editDish(id: Number) {},
+			async editDish(id: Number) {
+				alert('Work In Progress')
+			},
 		},
 		computed: {
 			availableOptions() {

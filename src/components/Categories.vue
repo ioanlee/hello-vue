@@ -8,7 +8,7 @@
 	export default defineComponent({
 		data() {
 			return {
-				items: [] as Category[],
+				categories: [] as Category[],
 				text: '' as string,
 			}
 		},
@@ -29,7 +29,7 @@
 			},
 			async refreshCategories() {
 				await axios.get(URL)
-					.then(res => this.items = res.data)
+					.then(res => this.categories = res.data)
 			}
 		}
 	})
@@ -42,7 +42,7 @@
 		<b-button class="" variant="outline-primary" type="submit">Add</b-button>
 	</b-form>
 	<!-- TODO change table to list for better animations -->
-	<div v-if="items.length">
+	<div v-if="categories.length">
 		<h2>Categories table</h2>
 		<table v-auto-animate class="table table-hover w-50 m-auto">
 			<thead>
@@ -52,7 +52,7 @@
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
-			<tbody v-for="(item, index) in items" :key="index">
+			<tbody v-for="(item, index) in categories" :key="index">
 				<tr>
 					<th scope="row"><span class="cell">{{ item.c_id }}</span></th>
 					<th scope="row"><span class="cell">{{ item.c_name }}</span></th>

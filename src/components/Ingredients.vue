@@ -12,7 +12,7 @@
 	export default defineComponent({
 		data() {
 			return {
-				items: [] as Ingredient[],
+				ingredients: [] as Ingredient[],
 				text: '' as string,
 			}
 		},
@@ -33,7 +33,7 @@
 			},
 			async refreshIngredients() {
 				await axios.get(URL)
-					.then(res => this.items = res.data)
+					.then(res => this.ingredients = res.data)
 			}
 		}
 	})
@@ -55,7 +55,7 @@
 				<th scope="col">Action</th>
 			</tr>
 		</thead>
-		<tbody v-for="(item, index) in items" :key="index">
+		<tbody v-for="(item, index) in ingredients" :key="index">
 			<tr>
 				<th scope="row"><span class="cell">{{ item.i_id }}</span></th>
 				<th scope="row"><span class="cell">{{ item.i_name }}</span></th>

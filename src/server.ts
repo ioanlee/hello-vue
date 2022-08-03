@@ -1,5 +1,5 @@
 import express, { Application, Request, Response } from 'express'
-import PostgresController from './controllers/controller'
+import PostgresController from './controllers/DBOController'
 import { PrismaClient } from '@prisma/client'
 import { client } from './db.config'
 
