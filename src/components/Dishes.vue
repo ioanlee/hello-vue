@@ -9,8 +9,11 @@
 	export default defineComponent({
 		data() {
 			return {
+				test: [
+					{}
+				],
 				selected_ingredients: [],
-				// test_ingredients: ['Apple', 'Orange', 'Banana', 'Lime', 'Peach', 'Chocolate', 'Strawberry'] as any,
+				test_ingredients: ['Apple', 'Orange', 'Banana', 'Lime', 'Peach', 'Chocolate', 'Strawberry'] as any,
 
 				dishes: [] as Dish[],
 				categories: [] as any,
@@ -100,7 +103,7 @@
 		<!-- * Image file select -->
 		<!-- TODO file input styling -->
 		<b-form-group label="Image:" label-for="input-image">
-			<input class="w-100 btn" type="file" @change="onImageSelected">
+			<input class="form-control" type="file" id="formFile" @change="onImageSelected">
 		</b-form-group>
 		<!-- * Ingredients select -->
 		<!-- <b-form-group label="Tagged input using select" label-for="tags-component-select">

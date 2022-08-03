@@ -7,6 +7,8 @@ import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import { FormFilePlugin } from 'bootstrap-vue'
+
 // .use(router)
 createApp(App)
 	.use(BootstrapVue3)
