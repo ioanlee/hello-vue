@@ -1,4 +1,3 @@
-<!-- TODO editable dish rows -->
 <script lang="ts">
 	import { defineComponent } from "vue"
 	import axios, { AxiosResponse } from 'axios'
@@ -90,6 +89,7 @@
 		<!-- * Buttons -->
 		<b-button class="w-50 m-2" type="submit" variant="primary">Create dish</b-button>
 	</b-form>
+	<!-- TODO editable dish rows -->
 	<!-- TODO change table to list for better animations -->
 	<div v-if="dishes.length">
 		<h2>Dishes table</h2>
