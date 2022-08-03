@@ -103,7 +103,7 @@
 		<!-- * Image file select -->
 		<!-- TODO file input styling -->
 		<b-form-group label="Image:" label-for="input-image">
-			<input class="form-control" type="file" id="formFile" @change="onImageSelected">
+			<input class="form-control" type="file" id="formFile" @change="onImageSelected" required>
 		</b-form-group>
 		<!-- * Ingredients select -->
 		<!-- <b-form-group label="Tagged input using select" label-for="tags-component-select">
@@ -146,38 +146,38 @@
 	</b-form>
 	
 
-	<h2>Dishes table</h2>
 	<!-- <img src="../../uploads/1b0105075d69871325902354be133837" alt=""> -->
 	<!-- TODO change table to list for better animations -->
-	<table v-auto-animate class="table table-hover w-50 m-auto">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Image</th>
-				<th scope="col">Name</th>
-				<th scope="col">Category</th>
-				<!-- <th scope="col">Ingredients</th> -->
-				<th scope="col">Action</th>
-			</tr>
-		</thead>
-		<tbody v-for="(item, index) in dishes" :key="index">
-			<tr>
-				<th scope="row"><span class="cell">{{ item.id }}</span></th>
-				<th scope="row"><span class="cell"><img class="w-50" :src="`uploads/${item.image || 'logo.png'}`" alt=""></span></th>
-				<th scope="row"><span class="cell">{{ item.name }}</span></th>
-				<th scope="row"><span class="cell">{{ item.category }}</span></th>
-				<!-- <th scope="row"><span class="cell ingredients" v-for="(ingredient, index) in item.ingredients" :key="index">{{ ingredient }}</span></th> -->
-				<th scope="row">
-					<b-button class="w-100 mt-1" variant="outline-primary" @click="editDish(item.id)">Edit</b-button>
-					<b-button class="w-100 mt-1" variant="outline-danger" @click="deleteDish(item.id)">Delete</b-button>
-				</th>
-			</tr>
-		</tbody>
-	</table>
+	<div v-if="dishes.length">
+		<h2>Dishes table</h2>
+		<table v-auto-animate class="table table-hover w-50 m-auto">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Image</th>
+					<th scope="col">Name</th>
+					<th scope="col">Category</th>
+					<!-- <th scope="col">Ingredients</th> -->
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody v-for="(item, index) in dishes" :key="index">
+				<tr>
+					<th scope="row"><span class="cell">{{ item.id }}</span></th>
+					<th scope="row"><span class="cell"><img class="w-50" :src="`uploads/${item.image || 'logo.png'}`" alt=""></span></th>
+					<th scope="row"><span class="cell">{{ item.name }}</span></th>
+					<th scope="row"><span class="cell">{{ item.category }}</span></th>
+					<!-- <th scope="row"><span class="cell ingredients" v-for="(ingredient, index) in item.ingredients" :key="index">{{ ingredient }}</span></th> -->
+					<th scope="row">
+						<b-button class="w-100 mt-1" variant="outline-primary" @click="editDish(item.id)">Edit</b-button>
+						<b-button class="w-100 mt-1" variant="outline-danger" @click="deleteDish(item.id)">Delete</b-button>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </template>
 
 <style lang="scss">
-	.ingredients:not(:last-of-type)::after {
-		content: ', ';
-	}
+	.ingredients:not(:last-of-type)::after { content: ', '; }
 </style>

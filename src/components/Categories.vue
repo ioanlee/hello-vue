@@ -16,9 +16,9 @@
 			this.refreshCategories()
 		},
 		methods: {
-			async addCategory(text: String) {
-				if (text) { 
-					await axios.post(URL, { name: text })
+			async addCategory() {
+				if (this.text) { 
+					await axios.post(URL, { name: this.text })
 					this.text = ''
 					this.refreshCategories()
 				}
@@ -37,28 +37,30 @@
 
 <template>
 	<h2>Add new category</h2>
-	<div class="container create-row w-50">
-		<b-form-input v-model="text" placeholder="Enter category name"></b-form-input>
-		<b-button variant="outline-primary" @click="addCategory(text)">Add</b-button>
-	</div>
-	<h2>Categories table</h2>
+	<b-form class="w-50 m-auto form-row" @submit="addCategory">
+		<b-form-input v-model="text" placeholder="Enter category name" required></b-form-input>
+		<b-button class="" variant="outline-primary" type="submit">Add</b-button>
+	</b-form>
 	<!-- TODO change table to list for better animations -->
-	<table v-auto-animate class="table table-hover w-50 m-auto">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Name</th>
-				<th scope="col">Action</th>
-			</tr>
-		</thead>
-		<tbody v-for="(item, index) in items" :key="index">
-			<tr>
-				<th scope="row"><span class="cell">{{ item.c_id }}</span></th>
-				<th scope="row"><span class="cell">{{ item.c_name }}</span></th>
-				<th scope="row"><b-button variant="outline-danger" @click="deleteCategory(item.c_id)">Delete</b-button></th>
-			</tr>
-		</tbody>
-	</table>
+	<div v-if="items.length">
+		<h2>Categories table</h2>
+		<table v-auto-animate class="table table-hover w-50 m-auto">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody v-for="(item, index) in items" :key="index">
+				<tr>
+					<th scope="row"><span class="cell">{{ item.c_id }}</span></th>
+					<th scope="row"><span class="cell">{{ item.c_name }}</span></th>
+					<th scope="row"><b-button variant="outline-danger" @click="deleteCategory(item.c_id)">Delete</b-button></th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </template>
 
 <style lang="scss">
@@ -67,8 +69,10 @@
 		line-height: 200%;
 		margin: auto 0;
 	}
-	.create-row {
+	.form-row {
 		display: flex;
+		flex-direction: row;
+		align-items: center;
 		gap: 10px;
 	}
 	h2 {

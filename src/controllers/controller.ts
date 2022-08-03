@@ -15,7 +15,7 @@ export default class PostgresController {
 	}
 
 	async addCategory(body: {name: string}) {
-		// TODO checks for incorrect inputs
+		// TODO checks for incorrect inputs or already existing input
 		const query = `INSERT INTO categories(c_name) VALUES('${body.name}')`
 		await client.query(query)
 		return { result: `successfully added new category ${body.name}`}
@@ -40,7 +40,7 @@ export default class PostgresController {
 	}
 	
 	async addIngredient(body: {name: string}) {
-		// TODO checks for incorrect inputs
+		// TODO checks for incorrect inputs or already existing input
 		const query = `INSERT INTO ingredients(i_name) VALUES('${body.name}')`
 		await client.query(query)
 		return { result: `successfully added new ingredient ${body.name}`}
@@ -66,7 +66,7 @@ export default class PostgresController {
 
 	async addDish(body: any) {
 		// { name: string, image: string, category: number, ingredients: number[] }
-		// TODO checks for incorrect inputs
+		// TODO checks for incorrect inputs or already existing input
 		const { name, image, category, ingredients } = body
 		const query = `INSERT INTO dishes(d_name, d_category, d_image) VALUES('${name}', ${category}, '${image}');`
 		const { rows } = await client.query(query)
