@@ -1,25 +1,4 @@
-<!-- // TODO починить this -->
-<!-- // TODO вставить axios -->
-<!-- // TODO удаление категории -->
-<!-- // TODO create table dishes with relations -->
-<!-- // TODO categories table input -->
-<!-- // TODO create ingredients table + input -->
-<!-- // TODO fetch all ingredients -->
-<!-- // TODO replace id with ingredient name -->
-<!-- // TODO route to get dishes info -->
-<!-- // TODO create new dish input -->
-<!-- // TODO file storing -->
-<!-- // TODO remove errors by ts -->
-<!-- TODO ПОФИКСИТЬ ДОБАВЛЕНИЕ DISH-->
 <!-- TODO editable dish rows -->
-<!-- // TODO PRISMA -->
-<!-- TODO delete passwords from repository, fix .gitignore -->
-<!-- // TODO переделать fetch  -->
-<!-- // TODO animations -->
-<!-- // TODO how postgres work for portativity -->
-<!-- // TODO process.env.PORT :5000 -->
-<!-- // TODO delete dashboard -->
-
 <script lang="ts">
 	import { defineComponent } from "vue"
 	import axios, { AxiosResponse } from 'axios'
@@ -47,7 +26,7 @@
 		mounted() {
 			this.refreshDishes()
 			this.getCategories()
-			this.getIngredients()
+			// this.getIngredients()
 		},
 		methods: {
 			onImageSelected(event: any) {

@@ -53,7 +53,7 @@ export default class PostgresController {
 	}
 	
 	async getDishes() {
-		const query = `SELECT d_id AS id, d_name AS name, d_image AS image, c_name AS category, array_agg(i_name) AS ingredients FROM dishes LEFT JOIN categories ON d_category = c_id LEFT JOIN (SELECT dish_id, i_name FROM dish_to_ingredient LEFT JOIN ingredients ON ingredient_id=i_id ) AS ing ON d_id = dish_id GROUP BY d_id, d_name, d_image, c_name;`
+		const query = `Select d_id as id, d_name as name, d_image as image, c_name as category FROM dishes LEFT JOIN categories	ON d_category = c_id;`
 		const { rows } = await client.query(query)
 		return rows
 	}
@@ -68,7 +68,7 @@ export default class PostgresController {
 		// { name: string, image: string, category: number, ingredients: number[] }
 		// TODO checks for incorrect inputs
 		const { name, image, category, ingredients } = body
-		const query = `INSERT INTO dishes(d_name, d_category, d_image, d_ingredients) VALUES('${name}', ${category}, '${image}', ${ingredients});`
+		const query = `INSERT INTO dishes(d_name, d_category, d_image) VALUES('${name}', ${category}, '${image}');`
 		const { rows } = await client.query(query)
 		return { result: `successfully added new dish ${name}`}
 	}

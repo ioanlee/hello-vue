@@ -6,7 +6,7 @@
 	<b-nav tabs align="center">
 		<b-nav-item><router-link to="/">Dishes</router-link></b-nav-item>
 		<b-nav-item><router-link to="/categories">Categories</router-link></b-nav-item>
-		<b-nav-item><router-link to="/ingredients">Ingredients</router-link></b-nav-item>
+		<!-- <b-nav-item><router-link to="/ingredients">Ingredients</router-link></b-nav-item> -->
 	</b-nav>
 	<router-view></router-view>
 </template>

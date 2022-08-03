@@ -47,3 +47,11 @@ LEFT JOIN (
 ) as ing
 ON d_id = dish_id
 GROUP BY d_id, d_name, d_image, c_name;
+-- select dishes without ingredients
+Select d_id as id, 
+       d_name as name, 
+       d_image as image, 
+       c_name as category
+FROM dishes 
+LEFT JOIN categories
+    ON d_category = c_id;
