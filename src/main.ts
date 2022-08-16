@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 createApp(App)
-	.use(BootstrapVue3)
 	.use(router)
+	.use(BootstrapVue3)
 	.use(autoAnimatePlugin)
 	.mount('#app')
